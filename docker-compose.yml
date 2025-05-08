@@ -1,0 +1,69 @@
+#version: '3.6'
+#
+#services:
+##  app:
+##    image: 'by-grsu-eventlink:latest'
+##    build: ./
+##    ports:
+##      - "8080:8080"
+##    container_name: EventLinkApp
+##    restart: on-failure
+##    depends_on:
+##      - db
+##      - minio
+#
+#  db:
+#    image: 'postgres:13.1-alpine'
+#    ports:
+#      - "5432:5432"
+#    container_name: DB
+#    environment:
+#      - POSTGRES_DB=EventLink_db
+#      - POSTGRES_USER=${DB_USER:-marek}
+#      - POSTGRES_PASSWORD=${DB_PASSWORD:-marek}
+#
+#  minio:
+#    image: 'bitnami/minio:2020.2.20'
+#    ports:
+#      - '9000:9000'
+#    container_name: minIO
+#    environment:
+#        - TZ=UTC
+#        - MINIO_ACCESS_KEY=${MINIO_ACCESS:-marek_access}
+#        - MINIO_SECRET_KEY=${MINIO_SECRET:-marek_secret}
+version: '3.8'
+
+services:
+  server:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/EventLink_db
+      - SPRING_DATASOURCE_USERNAME=marek
+      - SPRING_DATASOURCE_PASSWORD=marek
+      - MINIO_URL=http://host.docker.internal:9000
+    depends_on:
+      - db
+      - minio
+    restart: unless-stopped
+
+  # Эти сервисы объявлены, но не будут запускаться автоматически
+  db:
+    image: 'postgres:13.1-alpine'
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=EventLink_db
+      - POSTGRES_USER=marek
+      - POSTGRES_PASSWORD=marek
+    restart: on-failure
+
+  minio:
+    image: 'bitnami/minio:2020.2.20'
+    ports:
+      - '9000:9000'
+    environment:
+      - MINIO_ACCESS_KEY=marek_access
+      - MINIO_SECRET_KEY=marek_secret
+    restart: on-failure

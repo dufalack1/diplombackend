@@ -1,0 +1,69 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/EventLink_db
+    username: marek
+    password: marek
+  liquibase:
+
+    change-log: db/changelog-master.xml
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  mail:
+    host: "smtp.gmail.com"
+    port: 587
+    username: "marekkris.lis@gmail.com"
+    password: "wvqd xhnz hzpz cwrd"
+    protocol: "smtp"
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
+
+
+security:
+  secret-word: grsubybybybyby
+  token-expiration: 8200
+
+swagger:
+  title: EventLink
+  app-version: 1.0.1
+  description: Endpoints documentation powered by Swagger
+  developer-name: Lisovsky Marek
+  developer-email: marekkris.lis@gmail.com
+
+minio:
+  server:
+    signer-override: "AWSS3V4SignerType"
+    end-point: ${MINIO_URL:http://localhost:9000}
+    access-key: "marek_access"
+    secret-key: "marek_secret"
+    maximum-file-size: "5120KB"
+    connection-timeout: 10000
+    request-timeout: 10000
+  storage:
+    redirection-end-point: ${MINIO_REP:http://localhost:9000}
+    default-image-name: "default.jpg"
+    allowed-photo-formats:
+      - "jpg"
+      - "jpeg"
+      - "png"
+      - "jp2"
+      - "HEIF"
+    buckets:
+      USER:
+        name: "my-activity-uavs"
+        server-side-default-object-path: "static/u-default.jpg"
+      CATEGORY:
+        name: "my-activity-cavs"
+        server-side-default-object-path: "static/c-default.jpg"
+      SUB_CATEGORY:
+        name: "my-activity-scavs"
+        server-side-default-object-path: "static/sc-default.jpg"

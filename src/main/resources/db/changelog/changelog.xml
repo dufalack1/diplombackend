@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd"
+        logicalFilePath="db/changelog">
+
+    <changeSet id="1" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="./queries/001.create-credentials-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="2" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="./queries/002.credentials-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="3" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="./queries/003.create-users-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="4" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="./queries/004.users-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="5" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="./queries/005.create-categories-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="6" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="./queries/006.categories-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="7" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="./queries/007.create-sub_categories-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="8" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/008.sub_categories-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="9" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/009.create-invitations-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="10" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/010.invitations-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="11" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/011.create-roles-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="12" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/012.roles-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="13" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/013.create-users_roles-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="14" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/014.users_roles-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="15" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/015.create-users_categories-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="16" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/016.users_categories-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="17" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/017.create-nodes-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="18" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/018.nodes-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="19" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/019.create-comments-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="20" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/020.comments-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="21" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/021.create-users_nodes-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="22" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/022.users_nodes-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="23" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/023.alter-invitations-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="24" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/024.join_requests-table-create.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="25" author="Marek Lisovsky">
+        <sqlFile encoding="UTF-8" path="queries/025.sub_categories-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>

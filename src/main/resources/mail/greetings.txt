@@ -1,0 +1,7 @@
+Welcome to EventLink!&
+Hey, dear %s.
+
+Welcome to EventLink project! Here you can find someone to go for a shopping or something, we don't even know.
+
+Have fun!
+Regards, EventLink team.

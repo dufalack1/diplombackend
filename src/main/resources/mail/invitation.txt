@@ -1,0 +1,9 @@
+You are invited to join us!&
+Hey, dear %s.
+
+Seems like ypu are invited to join us! That's great ;) We promise, you'll have fun!
+
+Here is your invitation code - %s; Don't lose it!
+
+Have fun!
+Regards, EventLink team.
