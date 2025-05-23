@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/EventLink_db
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/EventLink_db}
     username: marek
     password: marek
   liquibase:
@@ -42,6 +42,7 @@ swagger:
 minio:
   server:
     signer-override: "AWSS3V4SignerType"
+#    end-point: ${MINIO_URL:http://localhost:9000}
     end-point: ${MINIO_URL:http://localhost:9000}
     access-key: "marek_access"
     secret-key: "marek_secret"
@@ -49,7 +50,8 @@ minio:
     connection-timeout: 10000
     request-timeout: 10000
   storage:
-    redirection-end-point: ${MINIO_REP:http://localhost:9000}
+#    redirection-end-point: ${MINIO_REP:http://localhost:9000}
+    redirection-end-point: http://localhost:9000
     default-image-name: "default.jpg"
     allowed-photo-formats:
       - "jpg"

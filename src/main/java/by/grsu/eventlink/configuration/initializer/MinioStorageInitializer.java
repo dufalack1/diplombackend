@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.io.InputStream;
 import java.util.EnumSet;
 
 @Slf4j
@@ -42,10 +43,12 @@ public class MinioStorageInitializer {
             amazonS3Client.createBucket(bucketProperties.getName());
             amazonS3Client.setBucketPolicy(bucketProperties.getName(),
                     this.getPublicReadPolicy(bucketProperties.getName()));
-            amazonS3Client.putObject(new PutObjectRequest(
-                    bucketProperties.getName(), minioProperties.getDefaultImageName(),
-                    getServerSideObject(bucketProperties.getServerSideDefaultObjectPath())
-            ));
+            amazonS3Client.putObject(
+                    bucketProperties.getName(),
+                    minioProperties.getDefaultImageName(),
+                    getServerSideObject(bucketProperties.getServerSideDefaultObjectPath()),
+                    null
+            );
             log.info(String.format("Bucket %s was not exist, I create it.", bucketProperties.getName()));
         }
     }
@@ -61,8 +64,9 @@ public class MinioStorageInitializer {
     }
 
     @SneakyThrows
-    private File getServerSideObject(String serverSidePath) {
-        return resourceLoader.getResource(String.format("classpath:%s", serverSidePath)).getFile();
+    private InputStream getServerSideObject(String serverSidePath) {
+        return resourceLoader.getResource(String.format("classpath:%s", serverSidePath)).getInputStream();
     }
+
 
 }
