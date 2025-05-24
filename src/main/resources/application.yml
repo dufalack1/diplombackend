@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/EventLink_db}
-    username: marek
-    password: marek
+    username: ${SPRING_DATASOURCE_USERNAME:marek}
+    password: ${SPRING_DATASOURCE_PASSWORD:marek}
   liquibase:
 
     change-log: db/changelog-master.xml
