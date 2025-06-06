@@ -3,9 +3,12 @@ server:
 
 spring:
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/EventLink_db}
-    username: ${SPRING_DATASOURCE_USERNAME:marek}
-    password: ${SPRING_DATASOURCE_PASSWORD:marek}
+    #    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/EventLink_db}
+    #    username: ${SPRING_DATASOURCE_USERNAME:marek}
+    #    password: ${SPRING_DATASOURCE_PASSWORD:marek}
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
   liquibase:
 
     change-log: db/changelog-master.xml
@@ -42,16 +45,19 @@ swagger:
 minio:
   server:
     signer-override: "AWSS3V4SignerType"
-#    end-point: ${MINIO_URL:http://localhost:9000}
-    end-point: ${MINIO_URL:http://localhost:9000}
-    access-key: "marek_access"
-    secret-key: "marek_secret"
+    #    end-point: ${MINIO_URL:http://localhost:9000}
+    end-point: ${MINIO_URL}
+    #    end-point: ${MINIO_URL:http://localhost:9000}
+    #    access-key: "marek_access"
+    #    secret-key: "marek_secret"
+    access-key: ${ACCESS_KEY}
+    secret-key: ${SECRET_KEY}
     maximum-file-size: "5120KB"
     connection-timeout: 10000
     request-timeout: 10000
   storage:
-#    redirection-end-point: ${MINIO_REP:http://localhost:9000}
-    redirection-end-point: http://localhost:9000
+    #    redirection-end-point: http://localhost:9000
+    redirection-end-point: ${MINIO_REDIRECTION_URL}
     default-image-name: "default.jpg"
     allowed-photo-formats:
       - "jpg"
