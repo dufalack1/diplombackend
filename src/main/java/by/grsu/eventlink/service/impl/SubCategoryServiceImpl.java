@@ -34,15 +34,14 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 
     private final SubCategoryRepository subCategoryRepository;
     private final NodeRepository nodeRepository;
+
     @Override
     public void deleteSubCategoryById(Long subCategoryId) {
-//        Conditional.fromBoolean(subCategoryRepository.existsById(subCategoryId))
-//                .ifFalseThenThrow(() -> new SubCategoryNotFoundException(subCategoryId));
-//
-//        subCategoryRepository.deleteById(subCategoryId);
-        SubCategory sc = subCategoryRepository.findById(subCategoryId).orElseThrow(() -> new SubCategoryNotFoundException(subCategoryId));
-        nodeRepository.deleteAll(sc.getNodes());
+        Conditional.fromBoolean(subCategoryRepository.existsById(subCategoryId))
+                .ifFalseThenThrow(() -> new SubCategoryNotFoundException(subCategoryId));
+
         subCategoryRepository.deleteById(subCategoryId);
+
     }
 
     @Override

@@ -4,5 +4,5 @@ create table sub_categories (
     description text not null,
     short_description varchar(100) not null,
     image_url text not null,
-    categories_id bigint references categories(id)
+    categories_id bigint references categories(id) on delete cascade
 );

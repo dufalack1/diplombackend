@@ -4,5 +4,5 @@ create table users (
     displayed_name varchar(25) not null,
     avatar_url text not null,
     phone_number varchar(15) default null,
-    credentials_id bigint references credentials(id)
+    credentials_id bigint references credentials(id) on delete cascade
 );

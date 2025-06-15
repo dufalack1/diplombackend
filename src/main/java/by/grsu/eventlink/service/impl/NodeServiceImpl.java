@@ -90,13 +90,13 @@ public class NodeServiceImpl implements NodeService {
                 .orElseThrow(() -> new NodeNotFoundException(genericBufferDto.getNodeId()));
 
         joinRequestRepository.findByInvitedIdAndNodeId(genericBufferDto.getUserId(), genericBufferDto.getNodeId())
-                        .ifPresent(opt -> {
-                            throw new JoinRequestAlreadyPresentException(genericBufferDto.getUserId(),
-                                    genericBufferDto.getNodeId());
-                        });
+                .ifPresent(opt -> {
+                    throw new JoinRequestAlreadyPresentException(genericBufferDto.getUserId(),
+                            genericBufferDto.getNodeId());
+                });
 
         Conditional.fromBoolean(currentNode.getJoinedUsers().stream()
-                .anyMatch(usr -> usr.getId().equals(genericBufferDto.getUserId())) ||
+                        .anyMatch(usr -> usr.getId().equals(genericBufferDto.getUserId())) ||
                         currentNode.getOwner().getId().equals(genericBufferDto.getUserId()))
                 .ifTrueThenThrow(NodeAlreadyJoinedException::new);
 
@@ -149,8 +149,7 @@ public class NodeServiceImpl implements NodeService {
 
         JoinRequest joinRequest = JoinRequest.builder()
                 .node(currentNode)
-                .isInvited(Boolean.TRUE)
-//                .isInvited(Boolean.FALSE)
+                .isInvited(Boolean.FALSE)
                 .invited(joinCandidate)
                 .build();
 
@@ -174,7 +173,7 @@ public class NodeServiceImpl implements NodeService {
                 .orElseThrow(() -> new NodeNotFoundException(nodeId));
 
         if (!joinRequest.getIsInvited() || !currentNode.getId().equals(joinRequest.getNode().getId())
-            || !acceptanceCandidate.getId().equals(joinRequest.getInvited().getId())) {
+                || !acceptanceCandidate.getId().equals(joinRequest.getInvited().getId())) {
             throw new NodeNotInvitedException(acceptanceCandidate.getId(), nodeId);
         } else if (currentNode.getJoinedUsers().size() + 1 > currentNode.getRequiredPeople()) {
             throw new NodeRequiredPeopleOverflowException(currentNode.getRequiredPeople());
@@ -253,8 +252,8 @@ public class NodeServiceImpl implements NodeService {
     public GenericMessageDto removeJoinedPeople(GenericBufferDto genericBufferDto) {//кикнуть пользователя(пользователь должен принять приглашение)
         Conditional.fromBoolean(nodeRepository
                         .isUserJoined(genericBufferDto.getNodeId(), genericBufferDto.getUserId()))
-                        .ifFalseThenThrow(() -> new NodeNotInvitedException(genericBufferDto.getUserId(),
-                                genericBufferDto.getNodeId()));
+                .ifFalseThenThrow(() -> new NodeNotInvitedException(genericBufferDto.getUserId(),
+                        genericBufferDto.getNodeId()));
 
         Conditional.fromBoolean(userRepository.existsById(genericBufferDto.getUserId()))
                 .ifFalseThenThrow(() -> new UserNotFoundException(genericBufferDto.getUserId()));
@@ -329,22 +328,10 @@ public class NodeServiceImpl implements NodeService {
     }
 
     @Override
-//    public GenericMessageDto delete(Long id) {
-//        Conditional.fromBoolean(nodeRepository.existsById(id))
-//                .ifFalseThenThrow(() -> new NodeNotFoundException(id));
-//
-//        nodeRepository.deleteById(id);
-//
-//        return GenericMessageDto.builder()
-//                .message("Node was successfully deleted")
-//                .build();
-//    }
     public GenericMessageDto delete(Long id) {
-        var node = nodeRepository.findById(id).orElseThrow(() -> new NodeNotFoundException(id));
-        for (User user : node.getJoinedUsers()) {
-            user.getJoinedEvents().remove(node);
-        }
-        node.getJoinedUsers().clear();
+        Conditional.fromBoolean(nodeRepository.existsById(id))
+                .ifFalseThenThrow(() -> new NodeNotFoundException(id));
+
         nodeRepository.deleteById(id);
 
         return GenericMessageDto.builder()
@@ -387,7 +374,7 @@ public class NodeServiceImpl implements NodeService {
                 .ifTrueThenThrow(() -> new ValidationException("Place"));
 
         Conditional.fromBoolean(Objects.nonNull(nodeDto.getAgeLimit()) &&
-                (nodeDto.getAgeLimit() < 18 || nodeDto.getAgeLimit() > 150))
+                        (nodeDto.getAgeLimit() < 18 || nodeDto.getAgeLimit() > 150))
                 .ifTrueThenThrow(() -> new ValidationException("Age Limit (18-150)"));
 
         Conditional.fromBoolean(Objects.nonNull(nodeDto.getRequiredPeople()) &&
@@ -401,7 +388,7 @@ public class NodeServiceImpl implements NodeService {
                 .ifTrueThenThrow(() -> new ValidationException("Sub Category Id"));
 
         Conditional.fromBoolean(Objects.nonNull(nodeDto.getStartDate()) &&
-                DateUtils.getDateNow().after(nodeDto.getStartDate()))
+                        DateUtils.getDateNow().after(nodeDto.getStartDate()))
                 .ifTrueThenThrow(() -> new ValidationException("Start Date"));
     }
 
